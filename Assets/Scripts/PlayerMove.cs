@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 
     public float moveSpeed = 5f; 
     public float rotationSpeed = 10f;
+    public Transform cameraTransform;
 
     private Rigidbody rb;
 
@@ -14,6 +15,11 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        if (cameraTransform == null)
+        {
+            cameraTransform = Camera.main.transform;
+        }
     }
 
     // Update is called once per frame
@@ -22,16 +28,20 @@ public class PlayerMove : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal"); 
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (movement.magnitude >= 0.1f)
-        {
-            // Yönü karakterin hareket ettiði tarafa döndür
-            Quaternion targetRotation = Quaternion.LookRotation(movement);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        if (direction.magnitude >= 0.1f) 
+        { 
+         // Kameranýn yönüne göre karakterin bakýþ yönünü hesapla
+         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
 
-            // Karakteri hareket ettir
-            rb.MovePosition(transform.position + movement * moveSpeed * Time.deltaTime);
-        }
+        // Akýcý dönüþ için karakterin rotasyonunu interpolasyonla deðiþtir
+        Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+        // Karakteri ileri hareket ettir
+        Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        rb.MovePosition(transform.position + moveDirection.normalized * moveSpeed * Time.deltaTime);
     }
+}
 }
