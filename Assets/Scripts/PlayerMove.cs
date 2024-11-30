@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 5f; 
     public float rotationSpeed = 10f;
     public Transform cameraTransform;
-    Animator animator;
+    public Animator animator;
     private Rigidbody rb;
 
     // Start is called before the first frame update
@@ -21,51 +21,45 @@ public class PlayerMove : MonoBehaviour
         {
             cameraTransform = Camera.main.transform;
         }
+
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal"); 
+        Move();
+    }
+    void Move()
+    {
+        // Hareket için input al
+        float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        // Hareket yönünü hesapla
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f) 
-        { 
-         // Kameranýn yönüne göre karakterin bakýþ yönünü hesapla
-         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
-            
-        // Akýcý dönüþ için karakterin rotasyonunu interpolasyonla deðiþtir
-        Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-
-        // Karakteri ileri hareket ettir
-        Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        rb.MovePosition(transform.position + moveDirection.normalized * moveSpeed * Time.deltaTime);
-        }
-
-        UpdateAnimation(vertical);
-
-
-
-
-    }
-    
-    void UpdateAnimation(float vertical)
-    {
-        // Animator'daki Speed parametresini ayarla
-        if (vertical > 0)
+        if (direction.magnitude >= 0.1f)
         {
-            animator.SetFloat("Speed", 1f); // Ýleri animasyonu
-        }
-        else if (vertical < 0)
-        {
-            animator.SetFloat("Speed", -1f); // Geri animasyonu
+            // Karakterin dönmesi
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+            // Hareket et
+            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
+
+            // Animator'a hýz bilgisini gönder
+            animator.SetFloat("Speed", 1f); // Yürüme animasyonu
         }
         else
         {
-            animator.SetFloat("Speed", 0f); // Idle animasyonu
+            // Hareket yoksa idle animasyonu
+            animator.SetFloat("Speed", 0f);
         }
     }
 
