@@ -178,6 +178,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2105063069338542446, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2766644703710881839, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
+      propertyPath: revealRadius
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6197347559598927968, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
       propertyPath: m_Radius
       value: 1.0333366
@@ -221,7 +229,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2105063069338542446, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 889613169}
   m_SourcePrefab: {fileID: 100100000, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
 --- !u!1 &235595939
 GameObject:
@@ -503,11 +514,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &889613163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2105063069338542446, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
+  m_PrefabInstance: {fileID: 21593777}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &889613168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1620591189613345748, guid: 425e13cda55e9bd4b95bff344bd26527, type: 3}
   m_PrefabInstance: {fileID: 21593777}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &889613169
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889613163}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: e42efa2bd23a7b94ab0c1dba965839d5, type: 3}
+  m_Controller: {fileID: 9100000, guid: f1732f09362261a4fbb8b2757b205e06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
+    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
+    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
+    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Walking'\n\tFrom
+    animation clip 'Walking Backwards'"
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,7 +614,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 22.3
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1123,7 +1167,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 22.3
+    OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0

@@ -11,7 +11,7 @@ public class FogOfWar : MonoBehaviour
     void Update()
     {
         // Karakterin pozisyonunu Shader'a gönder
-        fogMaterial.SetVector("_PlayerPosition", new Vector4(player.position.x-1, player.position.y, player.position.z, 1));
+        fogMaterial.SetVector("_PlayerPosition", new Vector4(player.position.x-3/2, player.position.y, player.position.z-3/2, 1));
         fogMaterial.SetFloat("_RevealRadius", revealRadius);
     }
 }
