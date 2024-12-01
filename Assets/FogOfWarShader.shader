@@ -2,7 +2,7 @@ Shader "Unlit/FogOfWarShader"
 {
     Properties
     {
-        _MainTex("Main Texture", 2D) = "white" {}
+        _MainTex("Main Texture", 2D) = "gray" {}
         _FogColor("Fog Color", Color) = (0, 0, 0, 0.8)
         _PlayerPosition("Player Position", Vector) = (0, 0, 0, 1)
         _RevealRadius("Reveal Radius", Float) = 5.0
