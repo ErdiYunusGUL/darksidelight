@@ -7,7 +7,7 @@ public class ManagerAll : MonoBehaviour
 {
     public void Scene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
 }
