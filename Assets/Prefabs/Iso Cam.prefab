@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2486987189156503626}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 4.166276, y: 13.590001, z: -10.973724}
+  m_LocalPosition: {x: 4.1662765, y: 13.590001, z: -10.443725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: -30.05
+    NearClipPlane: -17.1
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 1
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1761139495378588905}
   - component: {fileID: 4556472396098871761}
-  - component: {fileID: 6354247655243338147}
+  - component: {fileID: 6180536962923640239}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6354247655243338147
+--- !u!114 &6180536962923640239
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
