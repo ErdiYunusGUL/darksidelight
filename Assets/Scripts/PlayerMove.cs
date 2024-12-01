@@ -5,63 +5,60 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 
-    public float moveSpeed = 5f; 
-    public float rotationSpeed = 10f;
-    public Transform cameraTransform;
-    public Animator animator;
-    private Rigidbody rb;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
-
-        if (cameraTransform == null)
-        {
-            cameraTransform = Camera.main.transform;
-        }
-
-        if (animator == null)
-        {
-            animator = GetComponent<Animator>();
-        }
-    }
+    public float speed = 5;
+    public float rotationSpeed = 10; // Rotasyon hýzý
+    public Animator animator; // Animator bileþeni
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        MoveAndAnimate();
     }
-    void Move()
+
+    void MoveAndAnimate()
     {
-        // Hareket için input al
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        bool isMoving = false; // Karakter hareket ediyor mu?
 
-        // Hareket yönünü hesapla
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
-
-        if (direction.magnitude >= 0.1f)
+        // Hareket kontrolü
+        if (Input.GetKey(KeyCode.W)) // ileri
         {
-            // Karakterin dönmesi
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(0f, targetAngle, 0f);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
-
-            // Hareket et
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            rb.MovePosition(transform.position + moveDirection * moveSpeed * Time.deltaTime);
-
-            // Animator'a hýz bilgisini gönder
-            animator.SetFloat("Speed", 1f); // Yürüme animasyonu
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            RotateCharacter(Vector3.forward);
+            isMoving = true;
         }
-        else
+        if (Input.GetKey(KeyCode.A)) // sola
         {
-            // Hareket yoksa idle animasyonu
-            animator.SetFloat("Speed", 0f);
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+            RotateCharacter(Vector3.left);
+            isMoving = true;
+        }
+        if (Input.GetKey(KeyCode.S)) // geri
+        {
+            transform.Translate(Vector3.back * Time.deltaTime * speed);
+            RotateCharacter(Vector3.back);
+            isMoving = true;
+        }
+        if (Input.GetKey(KeyCode.D)) // saða
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * speed);
+            RotateCharacter(Vector3.right);
+            isMoving = true;
+        }
+
+        // Animasyonu güncelle
+        if (animator != null)
+        {
+            animator.SetFloat("Speed", isMoving ? 1f : 0f); // "Speed" parametresi Idle (0) veya Walk (1)
         }
     }
 
-
+    // Karakteri hareket ettiði yöne döndür
+    void RotateCharacter(Vector3 direction)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(direction); // Hedef rotasyon
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
 }
+
+
+        

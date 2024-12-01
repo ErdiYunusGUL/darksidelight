@@ -10,11 +10,11 @@ public class Knife : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-          /* Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if(enemy != null)
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                enemy.TakeDamage(damage); 
-            } */
+                enemy.TakeDamage(damage);
+            }
             Destroy(gameObject);
 
         }

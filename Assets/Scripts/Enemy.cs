@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDAmage( int amount)
+    public void TakeDamage( int amount)
     {
         health -= amount;
         if (health <= 0)

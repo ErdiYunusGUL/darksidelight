@@ -5,47 +5,28 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    public float movementSpeed = 3;
-    public float jumpForce = 300;
-    public float timeBeforeNextJump = 1.2f;
-    private float canJump = 0f;
-    Animator anim;
-    Rigidbody rb;
-    
-    void Start()
-    {
-        anim = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
-    }
-
+    public float speed = 1, jump = 50;
+    // Update is called once per frame
     void Update()
     {
-        ControllPlayer();
-    }
+        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //transform.Translate(movement * Time.deltaTime * speed);
 
-    void ControllPlayer()
-    {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
-
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-        if (movement != Vector3.zero)
+        if (Input.GetKey(KeyCode.W))//forward
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 0.15f);
-            anim.SetInteger("Walk", 1);
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
         }
-        else {
-            anim.SetInteger("Walk", 0);
-        }
-
-        transform.Translate(movement * movementSpeed * Time.deltaTime, Space.World);
-
-        if (Input.GetButtonDown("Jump") && Time.time > canJump)
+        if (Input.GetKey(KeyCode.A))//left
         {
-                rb.AddForce(0, jumpForce, 0);
-                canJump = Time.time + timeBeforeNextJump;
-                anim.SetTrigger("jump");
+            transform.Translate(Vector3.left * Time.deltaTime * speed);
+        }
+        if (Input.GetKey(KeyCode.S))//back
+        {
+            transform.Translate(Vector3.back * Time.deltaTime * speed);
+        }
+        if (Input.GetKey(KeyCode.D))//right
+        {
+            transform.Translate(Vector3.right * Time.deltaTime * speed);
         }
     }
 }
