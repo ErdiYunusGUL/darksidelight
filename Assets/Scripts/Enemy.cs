@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-<<<<<<< HEAD
-    
-
-   
-    void Update()
-    {
-        
-=======
     public int health = 100; // Düþmanýn caný
     public float speed = 3f; // Düþmanýn hýzý
     public int damage = 10; // Oyuncuya verdiði hasar 
@@ -54,6 +46,5 @@ public class Enemy : MonoBehaviour
                 playerHealth.TakeDamage(damage);
             }
         }
->>>>>>> c7985e2dd8da0b1366af78dc8e318091a9af4492
     }
 }
