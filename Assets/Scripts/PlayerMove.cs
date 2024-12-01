@@ -4,59 +4,33 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-
-    public float speed = 5;
-    public float rotationSpeed = 10; // Rotasyon hýzý
-    public Animator animator; // Animator bileþeni
-
+    public float speed = 1, jump = 50;
     // Update is called once per frame
     void Update()
     {
-        MoveAndAnimate();
-    }
+        //Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        //transform.Translate(movement * Time.deltaTime * speed);
 
-    void MoveAndAnimate()
-    {
-        bool isMoving = false; // Karakter hareket ediyor mu?
-
-        // Hareket kontrolü
-        if (Input.GetKey(KeyCode.W)) // ileri
+        if (Input.GetKey(KeyCode.W))//forward
         {
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            RotateCharacter(Vector3.forward);
-            isMoving = true;
         }
-        if (Input.GetKey(KeyCode.A)) // sola
+        if (Input.GetKey(KeyCode.A))//left
         {
             transform.Translate(Vector3.left * Time.deltaTime * speed);
-            RotateCharacter(Vector3.left);
-            isMoving = true;
         }
-        if (Input.GetKey(KeyCode.S)) // geri
+        if (Input.GetKey(KeyCode.S))//back
         {
             transform.Translate(Vector3.back * Time.deltaTime * speed);
-            RotateCharacter(Vector3.back);
-            isMoving = true;
         }
-        if (Input.GetKey(KeyCode.D)) // saða
+        if (Input.GetKey(KeyCode.D))//right
         {
             transform.Translate(Vector3.right * Time.deltaTime * speed);
-            RotateCharacter(Vector3.right);
-            isMoving = true;
         }
-
-        // Animasyonu güncelle
-        if (animator != null)
-        {
-            animator.SetFloat("Speed", isMoving ? 1f : 0f); // "Speed" parametresi Idle (0) veya Walk (1)
-        }
-    }
-
-    // Karakteri hareket ettiði yöne döndür
-    void RotateCharacter(Vector3 direction)
-    {
-        Quaternion targetRotation = Quaternion.LookRotation(direction); // Hedef rotasyon
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        //if (Input.GetKeyDown(KeyCode.Space))//jump
+        //{
+        //    GetComponent<Rigidbody>().AddForce(Vector3.up * jump);
+        //}
     }
 }
 

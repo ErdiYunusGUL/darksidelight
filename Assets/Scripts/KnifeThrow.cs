@@ -22,7 +22,7 @@ public class KnifeThrow : MonoBehaviour
     {
         GameObject knife = Instantiate(knifePrefab, throwPoint.position, throwPoint.rotation);
         Rigidbody rb = knife.GetComponent<Rigidbody>();
-        rb.AddForce(throwPoint.forward* throwForce * -1 , ForceMode.Impulse);
+        rb.AddForce(throwPoint.forward* throwForce *    1 , ForceMode.Impulse);
         Destroy( knife ,3F );
             
     }
